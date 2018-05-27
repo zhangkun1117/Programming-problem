@@ -7,7 +7,7 @@
 */
 #include <bits/stdc++.h>
 using namespace std;
-#define num_hole 20
+#define num_hole 206
 int main(){
     int x,n;
     while(cin>>x>>n)
