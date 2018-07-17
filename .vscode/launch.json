@@ -1,6 +1,16 @@
 {  
     "version": "0.2.0",  
     "configurations": [  
+        {
+            "type": "java",
+            "name": "java(debug)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "",
+            "args": ""
+        },
         {  
             "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示  
             "type": "cppdbg",       // 配置类型，这里只能为cppdbg  
@@ -22,5 +32,6 @@
                 }  
             ]  
         }  
+        
     ]  
 }
