@@ -76,14 +76,14 @@ int main()
 	for (i = 1; i<Timewindows; i++)
 	{
 		int start = stage*(i - 1);
-		int finish = start + 60;
+		int finish = start + 59;
 		if (finish > m)
 			break;
 
 		for (int j = 0; j < finish - start + 1; j++)
 		{
-			svmonec[j] = svm[start + j + 1];
-			accyonec[j] = ACCy[start + j + 1];
+			svmonec[j] = svm[start + j ];
+			accyonec[j] = ACCy[start + j];
 		}
 		flags = PostureTag(svmonec, accyonec, finish - start + 1, lastdownindex);
 		totalstep += flags.step;
@@ -229,7 +229,7 @@ pos PostureTag(double* svm, double* accy, int len,int &lastdownindex)
 	for (int k = 1; k<len; k++)
 	{
 		sma += fabs(*(svm+k) - *(svm+k-1));		
-		//cout <<k<<" "<< "*(svm+k)=" << *(svm + k) << "  " << *(svm + k - 1) << " " << sma << endl;
+		cout <<k<<" "<< "*(svm+k)=" << *(svm + k) << "  " << *(svm + k - 1) << " " << sma << endl;
 	}
 	//cout << "子函数sma=" << sma << endl;
 	//姿态判断
@@ -240,7 +240,7 @@ pos PostureTag(double* svm, double* accy, int len,int &lastdownindex)
 	}
 	else
 	{
-		if (st>0.05)
+		if (st>0.03)
 			step = countStep(svm, lastdownindex, len);
 
 		if (sma > 20)
@@ -278,26 +278,33 @@ pos PostureTag(double* svm, double* accy, int len,int &lastdownindex)
 /************************************************************************/
 void checkflag(int* tag,int len)
 {
-	int ret = len;
 	for(int i=0;i<len;i++){
+		// 当前状态为跌倒状态，判断后面连续5个躺状态则当前认为摔倒
 		if(tag[i] ==7)
 		{
-
+			int n=0;
+			for(int j=i+1;j<=i+3 && j<len;j++){
+				if(tag[j] ==2)	n++;
+			}
+			if(n == 0) tag[i] = tag[i-1]; 
 		}
+		//当前状态判定为休息，且前面一个状态为走路或者跑步，则后面一个为站立
 		if(tag[i] == 3 && (tag[i-1] == 4 || tag[i-1] ==5)){
 			tag[i] = 0;
 			continue;
 		}
+		//当前状态为3，且前面一个为静止态，则认为同上一个状态
 		if(tag[i] ==3 && (tag[i-1]<=3)){
 			tag[i] = tag[i-1];
 			continue;
 		}
+		//当前状态为改变，并且下一个状态为休息，进行前后状态发生改变情况
 		if(tag[i] == 6 && i+1<len && tag[i+1] ==3){
 			if(tag[i-1] >3){
 				tag[i] = tag[i-1];
 				continue;
 			}
-			tag[i+1] = tag[i-1]==0 ?1:0;
+			tag[i+1] = (tag[i-1]==0) ?1:0;
 		}
 		else{
 			if(tag[i] == 6)
@@ -368,6 +375,8 @@ void checkflag(int* tag,int len)
 /*      1.5   6 状态改变：
 /*      2 	  7 发生跌倒
 */
+//
+/*
 int simplifyPosture(int *posture,int len,int step)
 {
 	int countPosture[8] ={0};
@@ -385,7 +394,7 @@ int simplifyPosture(int *posture,int len,int step)
 	if(countPosture[7] !=0) 
 		return 7;
 	//如果发生姿态转换，则返回转换后的姿态
-	if(countPosture[6] !=0 )
+	if(countPosture[6] !=0)
 		return posture[countPosture[6] - 1] == 0 ? 1:0;//countPosture[6]存放姿态转换位置，posture[countPosture[6] - 1]则为姿态转换前的姿态
 
 	int countIndex =  maxIndex(countPosture,6);
@@ -393,7 +402,7 @@ int simplifyPosture(int *posture,int len,int step)
 }
 /*
 求最大值位置
-*/
+
 int maxIndex(int * data,int ilen)
 {
 	int index =0;
@@ -403,4 +412,4 @@ int maxIndex(int * data,int ilen)
 			index = i;
 	}
 	return index;
-}
+}*/
