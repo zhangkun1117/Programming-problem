@@ -42,7 +42,7 @@ int main(){
     }
 }*/
 
-//2. 未通过
+//2. AC代码
 int main(){
     int N = 0;
     cin >> N;

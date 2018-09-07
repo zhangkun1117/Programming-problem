@@ -13,7 +13,10 @@
         "sstream": "cpp",
         "*.tcc": "cpp",
         "algorithm": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "istream": "cpp",
+        "string": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
