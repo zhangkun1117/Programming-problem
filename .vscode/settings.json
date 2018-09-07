@@ -16,7 +16,13 @@
         "utility": "cpp",
         "istream": "cpp",
         "string": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "numeric": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
