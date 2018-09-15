@@ -22,7 +22,18 @@
         "xhash": "cpp",
         "xstring": "cpp",
         "xtree": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "limits": "cpp",
+        "queue": "cpp",
+        "regex": "cpp",
+        "stack": "cpp",
+        "xutility": "cpp",
+        "bitset": "cpp",
+        "ratio": "cpp",
+        "iosfwd": "cpp",
+        "xlocale": "cpp",
+        "ostream": "cpp",
+        "xiosbase": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
