@@ -18,7 +18,7 @@ public:
             if(s2.count() ==0){
                 return 0; 
             }
-            while(s1.top(){
+            while(s1.top()){
                 s2.push(s1.top());
                 s1.pop();
             }
@@ -28,6 +28,6 @@ public:
             }
          };
 private:
-         Stack s1;
-         Stack s2;
+        Stack s1;
+        Stack s2;
 };
