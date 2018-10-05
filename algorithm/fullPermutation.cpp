@@ -95,7 +95,7 @@ void combination(int a[],int length)
 }
 int main(int argc, char **argv){    
     int a[4] = {1, 2, 3, 4};    
-    permutation(a,0,sizeof(a)/sizeof(int) -1)
+    permutation(a,0,sizeof(a)/sizeof(int) -1);
     //
     cout<<"Using STL to achieve permutation "<<endl;
     permutationRecursion(a, sizeof(a) / sizeof(int));    
